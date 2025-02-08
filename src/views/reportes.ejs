@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reporte</title>
+    <link rel="stylesheet" href="/css/inicio.css">
+</head>
+<body>
+    
+    <%- include('partials/navigation') %>
+<main>
+    <h1>Reporte de venta</h1>
+    <section class="repo1">
+        <div class="input-container">
+            <label for="documento">Ingrese N° Documento:</label>
+            <input type="text" id="documento">
+        </div>
+        <div class="input-container">
+            <label for="anio">Ingrese Año:</label>
+            <input type="text" id="anio">
+        </div>
+        <div class="btn"><button onclick="consultar()">Consultar</button>
+        </div>
+    </section>
+    <section class="repo2">
+        <div class="sup">
+            <div class="repoClientes">
+                <h1>Cliente</h1>
+                <textarea></textarea>
+            </div>
+            <div class="repoVenta">
+                <h1>Venta</h1>
+                <textarea></textarea>
+            </div>
+            <div class="repoPago">
+                <h1>Costo</h1>
+                <textarea></textarea>
+            </div>
+        </div>
+        <div class="inf">
+            <section class="iFecha">
+                <div class="fr"><h4>Fecha Registro</h4> <img src="/img/ifech.png" alt=""></div>
+                <div><h4>12/12/2025 | 10:10:15 hrs</h4></div>
+            </section>
+            <section class="iFecha">
+                <div class="fr"><h4>N° Registro</h4> <img src="/img/ireg.png" alt=""></div>
+                <div><h4>000001</h4></div>
+            </section>
+        </div>
+    </section>
+</main>
+</body>
+<script>
+</script>
+</html>
