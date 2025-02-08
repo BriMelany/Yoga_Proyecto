@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/clientes.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <%- include('partials/navigation') %>
+
+    <main>
+        <section class="register-container">
+
+            <h1>Registro de Clientes</h1>
+            <div class="register">
+                <div class="date-register">
+
+                    <span>Fecha Registro</span>
+                    <span> 01/01/2020 |10:10:15 Hrs</span>
+                </div>
+
+                <div class="date-register">
+
+                    <span>N° Registro</span>
+                    <span> 000000001</span>
+
+                </div>
+            </div>
+        </section>
+
+        <section class="form-container">
+
+            <div class="encabezado">DATOS</div>
+            <form>
+
+                <div class="form-line-contain">
+                    <div class="form-line">
+
+                        <div class="line1">
+                            <label>Nombres:</label>
+                            <input type="text">
+                        </div>
+
+                        <div class="line1">
+                            <label>Apellidos:</label>
+                            <input type="text">
+                        </div>
+
+                    </div>
+
+                    <div class="form-line">
+
+                        <div class="line3">
+                            <label>Documento:</label>
+                            <select>
+                                <option value="DNI">DNI</option>
+                                <option value="Pasaporte">Pasaporte</option>
+                                <option value="Carnet de extranjería">Carnet de extranjería</option>
+                            </select>
+                        </div>
+
+                        <div class="line1">
+                            <label>Email:</label>
+                            <input type="email">
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-line">
+
+                        <div class="line1">
+                            <div class="number">
+                                <label>Numero:</label>
+                                <input type="text">
+                            </div>
+                            <button>Buscar</button>
+                        </div>
+
+                        <div class="line1">
+                            <label>Telefono:</label>
+                            <input type="text">
+                        </div>
+
+                    </div>
+
+                    <div class="form-line-2">
+
+                        <div class="line4">
+                            <label>Dirección:</label>
+                            <input type="text">
+                        </div>
+                    </div>
+
+                    <div class="form-line">
+
+                        <div class="line1">
+                            <label>Ciudad:</label>
+                            <input type="text">
+                        </div>
+
+                        <div class="line1">
+                            <label>Provincia:</label>
+                            <input type="text">
+                        </div>
+
+                    </div>
+
+
+                    <div class="form-line">
+
+                        <div class="line1">
+                            <label>Distrito:</label>
+                            <input type="text">
+                        </div>
+
+                        <div class="line3">
+                            <label>País:</label>
+                            <select>
+                                <option value="Peru">Perú</option>
+                                <option value="Argentina">Argentina</option>
+                                <option value="Brasil">Brasil</option>
+                                <option value="Chile">Chile</option>
+                                <option value="Colombia">Colombia</option>
+                                <option value="Ecuador">Ecuador</option>
+                                <option value="México">México</option>
+                                <option value="España">España</option>
+                                <option value="Estados Unidos">Estados Unidos</option>
+                                <option value="Francia">Francia</option>
+                                <option value="Alemania">Alemania</option>
+                                <option value="Italia">Italia</option>
+                                <option value="Japón">Japón</option>
+                                <option value="China">China</option>
+                                <option value="India">India</option>
+                            </select>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="final-line">
+
+                    <div class="client">
+
+                        <div class="check">
+                            <input type="radio" name="cliente">
+                            <label>Cliente Nuevo</label>
+                        </div>
+                        <div class="check">
+                            <input type="radio" name="cliente">
+                            <label>Cliente Potencial</label>
+                        </div>
+                        <div class="check">
+                            <input type="radio" name="cliente">
+                            <label>Cliente Recurrente</label>
+                        </div>
+
+                    </div>
+
+                    <div class="buttons">
+
+                        <button>Guardar Cliente</button>
+                        <button>Limpiar datos</button>
+
+                    </div>
+
+                </div>
+
+
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <main>
+
+        <section class="search-section ">
+
+            <img src="/img/filtro.png" alt="">
+
+            <div class="search">
+                <div class="search-container">
+                    <i class="search-icon fas fa-search"></i>
+                    <input type="text" class="search-input" placeholder="Buscar...">
+                </div>
+            </div>
+
+
+        </section>
+
+        <section class="table-section">
+            <table class="table table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th scope="col">Documento</th>
+                        <th scope="col">Cliente</th>
+                        <th scope="col">Correo</th>
+                        <th scope="col">Celular</th>
+                        <th scope="col">Tipo de Cliente</th>
+                        <th scope="col">Fecha Registro</th>
+                        <th scope="col">Dirección</th>
+                        <th scope="col">Acciones</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row">12345678</th>
+                        <td>Nombre y Apellido 1</td>
+                        <td>example@gmail.com</td>
+                        <td>987654321</td>
+                        <td>Cliente Nuevo</td>
+                        <td>01/01/2020</td>
+                        <td>Av. Los Pinos 123</td>
+                        <td>
+                            <button class="btn btn-primary">Editar</button>
+                            <button class="btn btn-primary">Eliminar</button>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th scope="row">12345678</th>
+                        <td>Nombre y Apellido 2</td>
+                        <td>example@gmail.com</td>
+                        <td>987654321</td>
+                        <td>Cliente Recurrente</td>
+                        <td>01/01/2020</td>
+                        <td>Av. Los Pinos 123</td>
+                        <td>
+                            <button class="btn btn-primary">Editar</button>
+                            <button class="btn btn-primary">Eliminar</button>
+                        </td>
+                    </tr>
+
+                </tbody>
+            </table>
+        </section>
+
+
+    </main>
+
+
+
+
+</body>
+
+</html>
