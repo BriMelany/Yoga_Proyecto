@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/head') %>
+
+    <title>Registro de Ventas</title>
+    <link rel="stylesheet" href="../css/venta.css">
+</head>
+<body>
+    <%- include('partials/navigation') %>
+    <main>
+        <section class="text-info">
+            <h3 class="text-primary">Registro de Venta / Oportunidad de Venta</h3>
+            <div class="inf">
+                <section class="iFecha">
+                    <div class="fr"><h4>Fecha Registro</h4> <img src="/img/ifech.png" alt=""></div>
+                    <div><h4>12/12/2025 | 10:10:15 hrs</h4></div>
+                </section>
+                <section class="iFecha">
+                    <div class="fr"><h4>N° Registro</h4> <img src="/img/ireg.png" alt=""></div>
+                    <div><h4>000001</h4></div>
+                </section>
+            </div>
+        </section>
+        
+        <section class="mt-4">
+            <h2 class="title_section">Cliente</h2>
+            <div class="col-md-3 d-flex flex-direction-column" >
+                <label>Documento:</label>
+                <select class="form-select placeH" id="tipo_documento">
+                    <option value="">Seleccione Tipo de Documento</option>
+                    <option>DNI</option>
+                    <option>Pasaporte</option>
+                </select>
+            </div>
+            <div class="col-md-5 d-flex flex-direction-column">
+                <label>Número:</label>
+                <input type="text" class="form-control" placeholder="Ingrese el número de documento" id="numero_documento">
+                <button class="btn btn-primary" id="btn_cliente">
+                    <p>Buscar</p>
+                </button>
+            </div>
+            <div class="col-md-12 d-flex flex-direction-column">
+                <label>Cliente:</label>
+                <input type="text" class="form-control" placeholder="Bloqueado" id="nombre_cliente">
+                <label>Email:</label>
+                <input type="email" class="form-control" placeholder="Bloqueado" id="email_cliente">
+                <label>Telefono:</label>
+                <input type="text" class="form-control" placeholder="Bloqueado" id="telefono_cliente">
+            </div>
+
+    </section>
+    <section class="bigSection">
+        <section class="Servicio">
+            <h2 class="title_section">Servicio</h2>
+            <div class="col-md-3 d-flex flex-direction-column" >
+                <label>Servicio o taller:</label>
+                <select class="form-select placeH" id="servicio">
+                    <option value="">Seleccione Servicio</option>
+                    <option>Yoga</option>
+                    <option>Meditación</option>
+                </select>
+            </div>
+            <div class="col-md-5 d-flex flex-direction-column">
+                <label>Turno: </label>
+                <select class="form-select placeH" id="turno">
+                    <option value="">Mañana/Tarde/Noche</option>
+                    <option value="mañana">Mañana</option>
+                    <option value="tarde">Tarde</option>
+                    <option value="noche">Noche</option>
+                </select>
+                <label>Horario:</label>
+                <input type="time" class="form-control" id="horario">
+                
+            </div>
+            <div class="col-md-6 d-flex flex-direction-column">
+                <label>Tipo:</label>
+                <select class="form-select placeH" id="tipo">
+                    <option value="">Virtual/Presencial</option>
+                    <option value="virtual">Virtual</option>
+                    <option value="presencial">Presencial</option>
+                   
+                </select>
+                <label>Estado: </label>
+                <select class="form-select placeH" id="estado">
+                    <option value="">En proceso/Confirmacion/Atendido</option>
+                    <option value="proceso">En proceso</option>
+                    <option value="confirmado">Confirmado</option>
+                    <option value="atendido">Atendido</option>
+
+                </select>
+            </div>
+    </section>
+    <section class="pago">
+            <h2 class="title_section">Pago</h2>
+            <div class="d-flex flex-direction-column" >
+                <label>Monto:</label>
+                <input type="number" class="form-control" placeholder="Ingrese el monto" id="monto">
+            </div>
+            <div class="d-flex flex-direction-column">
+                <label>Fecha de pago:</label>
+                <input type="date" class="form-control" id="fecha_pago">
+
+            </div>
+            <div class="d-flex flex-direction-column">
+                <label>Medio de pago:</label>
+                <select class="form-select placeH" id="medio_pago">
+                    <option value="">Seleccionar medio de pago</option>
+                    <option value="efectivo">Efectivo</option>
+                    <option value="tarjeta">Tarjeta</option>
+                </select>
+            </div>
+
+    </section>
+    </section>
+    <div class="clear">
+        <button class="btn btn-primary" id="btn_limpiar">
+            <p>Limpiar datos</p>
+        </button>
+        <button class="btn btn-primary" id="btn_registrar">
+            <p>Generar registros</p>
+        </button>
+    </div>
+    
+    </main>
+    <button id="ver_registros"></button>
+    <section class="table_section">
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>N° de Registro</th>
+                    <th>Documento</th>
+                    <th>Cliente</th>
+                    <th>Servicio 4</th>
+                    <th>Estado</th>
+                    <th>Fecha Registro</th>
+                    <th>Utimo contacto</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td><input type="checkbox">00000001</td>
+                    <td>12345678</td>
+                    <td>Nombre y Apellido</td>
+                    <td>Clase de yoga</td>
+                    <td>Atendido</td>
+                    <td>Cliente Nuevo</td>
+                    <td>10/10/2024</td>
+                    <td>
+                        <button class="button_crud">
+                            <img src="/img/image 108.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 109.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 112.png" alt="">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox">00000001</td>
+                    <td>12345678</td>
+                    <td>Nombre y Apellido</td>
+                    <td>Clase de yoga</td>
+                    <td>Atendido</td>
+                    <td>Cliente Nuevo</td>
+                    <td>10/10/2024</td>
+                    <td>
+                        <button class="button_crud">
+                            <img src="/img/image 108.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 109.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 112.png" alt="">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox">00000001</td>
+                    <td>12345678</td>
+                    <td>Nombre y Apellido</td>
+                    <td>Clase de yoga</td>
+                    <td>Atendido</td>
+                    <td>Cliente Nuevo</td>
+                    <td>10/10/2024</td>
+                    <td>
+                        <button class="button_crud">
+                            <img src="/img/image 108.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 109.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 112.png" alt="">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox">00000001</td>
+                    <td>12345678</td>
+                    <td>Nombre y Apellido</td>
+                    <td>Clase de yoga</td>
+                    <td>Atendido</td>
+                    <td>Cliente Nuevo</td>
+                    <td>10/10/2024</td>
+                    <td>
+                        <button class="button_crud">
+                            <img src="/img/image 108.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 109.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 112.png" alt="">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox">00000001</td>
+                    <td>12345678</td>
+                    <td>Nombre y Apellido</td>
+                    <td>Clase de yoga</td>
+                    <td>Atendido</td>
+                    <td>Cliente Nuevo</td>
+                    <td>10/10/2024</td>
+                    <td>
+                        <button class="button_crud">
+                            <img src="/img/image 108.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 109.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 112.png" alt="">
+                        </button>
+                    </td>
+                </tr>
+                <tr>
+                    <td><input type="checkbox">00000001</td>
+                    <td>12345678</td>
+                    <td>Nombre y Apellido</td>
+                    <td>Clase de yoga</td>
+                    <td>Atendido</td>
+                    <td>Cliente Nuevo</td>
+                    <td>10/10/2024</td>
+                    <td>
+                        <button class="button_crud">
+                            <img src="/img/image 108.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 109.png" alt="">
+                        </button>
+                        <button class="button_crud">
+                            <img src="/img/image 112.png" alt="">
+                        </button>
+                    </td>
+                </tr>
+
+            </tbody>
+            
+        </table>
+        <div class="paginacion">
+            <button class="text_button">Anterior</button>
+            <button class="number_button">1</button>
+            <button class="number_button">2</button>
+            <button class="number_button">3</button>
+            <button class="number_button">4</button>
+            <button class="number_button">5</button>
+            <button class="text_button">Siguiente</button>
+        </tfoot>
+    </div>
+    
+            </body>
+            <script src="./js/venta.js"></script>
+</html>
+
