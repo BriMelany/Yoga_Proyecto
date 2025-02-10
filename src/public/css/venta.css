@@ -167,7 +167,7 @@ text-transform: uppercase;
 .btn-primary{
     background-color: #026FEF;
     height: 32px;
-    width: 522px;
+    max-width: 522px;
     border-radius: 27.5px;
     
 }
@@ -239,9 +239,7 @@ main{
     flex-direction: row;
     justify-self: right;
 }
-    .text_button{
-
-    }
+    
     button .number_button{
         color: white;
         font-weight: bold;

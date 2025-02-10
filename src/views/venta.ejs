@@ -20,7 +20,7 @@
                 </section>
                 <section class="iFecha">
                     <div class="fr"><h4>N° Registro</h4> <img src="/img/ireg.png" alt=""></div>
-                    <div><h4>000001</h4></div>
+                    <div><h4 id="venta_id">000001</h4></div>
                 </section>
             </div>
         </section>
@@ -28,12 +28,6 @@
         <section class="mt-4">
             <h2 class="title_section">Cliente</h2>
             <div class="col-md-3 d-flex flex-direction-column" >
-                <!-- <label>Documento:</label>
-                <select class="form-select placeH" id="tipo_documento">
-                    <option value="">Seleccione Tipo de Documento</option>
-                    <option>DNI</option>
-                    <option>Pasaporte</option>
-                </select> -->
             </div>
             <div class="col-md-5 d-flex flex-direction-column">
                 <label>Número:</label>
@@ -41,6 +35,7 @@
                 <button class="btn btn-primary" id="btn_cliente">
                     <p>Buscar</p>
                 </button>
+                
             </div>
             <div class="col-md-12 d-flex flex-direction-column">
                 <label>Cliente:</label>
@@ -59,17 +54,17 @@
                 <label>Servicio o taller:</label>
                 <select class="form-select placeH" id="tipo_servicio">
                     <option value="">Seleccione Servicio</option>
-                    <option>Yoga</option>
-                    <option>Meditación</option>
+                    <option value="Yoga">Yoga</option>
+                    <option value="Meditación">Meditación</option>
                 </select>
             </div>
             <div class="col-md-5 d-flex flex-direction-column">
                 <label>Turno: </label>
                 <select class="form-select placeH" id="turno">
                     <option value="">Mañana/Tarde/Noche</option>
-                    <option value="mañana">Mañana</option>
-                    <option value="tarde">Tarde</option>
-                    <option value="noche">Noche</option>
+                    <option value="Mañana">Mañana</option>
+                    <option value="Tarde">Tarde</option>
+                    <option value="Noche">Noche</option>
                 </select>
                 <label>Horario:</label>
                 <input type="time" class="form-control" id="horario">
@@ -79,16 +74,16 @@
                 <label>Tipo:</label>
                 <select class="form-select placeH" id="tipo_sesion">
                     <option value="">Virtual/Presencial</option>
-                    <option value="virtual">Virtual</option>
-                    <option value="presencial">Presencial</option>
+                    <option value="Virtual">Virtual</option>
+                    <option value="Presencial">Presencial</option>
                    
                 </select>
                 <label>Estado: </label>
                 <select class="form-select placeH" id="estado">
                     <option value="">En proceso/Confirmacion/Atendido</option>
-                    <option value="proceso">En proceso</option>
-                    <option value="confirmado">Confirmado</option>
-                    <option value="atendido">Atendido</option>
+                    <option value="En Proceso">En Proceso</option>
+                    <option value="Confirmado">Confirmado</option>
+                    <option value="Atendido">Atendido</option>
 
                 </select>
             </div>
@@ -104,17 +99,14 @@
                 <input type="date" class="form-control" id="fecha_pago">
 
             </div>
-            <div class="d-flex flex-direction-column">
-                <label>Fecha de registro:</label>
-                <input type="date" class="form-control" id="fecha_registro">
-
-            </div>
+            
             <div class="d-flex flex-direction-column">
                 <label>Medio de pago:</label>
                 <select class="form-select placeH" id="medio_pago">
                     <option value="">Seleccionar medio de pago</option>
-                    <option value="efectivo">Efectivo</option>
-                    <option value="tarjeta">Tarjeta</option>
+                    <option value="Tarjeta de Crédito">Tarjeta</option>
+                    <option value="Transferencia">Transferencia</option>
+                    
                 </select>
             </div>
 
@@ -127,10 +119,15 @@
         <button class="btn btn-primary" id="btn_registrar">
             <p>Generar registros</p>
         </button>
+        <button class="btn btn-primary" id="btn_actualizar" disabled>
+            <p>Actualizar registros</p>
+        </button>
     </div>
     
     </main>
-    <button id="ver_registros">Ver registros</button>
+    <button id="ver_registros" class="btn btn-primary">
+        <p>Ver Registros</p>
+    </button>
     <section class="table_section">
         <table border="1">
             <thead>
