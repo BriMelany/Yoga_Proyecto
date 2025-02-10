@@ -11,11 +11,10 @@ async function consultar() {
         const url = `https://api-proyecto-3.onrender.com/api/reporte/${documento}/${anio}`;
         
 // Esto es para verificar si la respuesta de la API es incorrecta
-const proxy = "https://cors-anywhere.herokuapp.com/";
 
-const response = await fetch(proxy + url);
 
-const data = await response.json();
+const response = await fetch(url);
+
         if (!response.ok) {
             eliminarRepo2(); 
             limpiarCampos(); // Limpia los inputs cuando no hay datos
@@ -26,7 +25,7 @@ const data = await response.json();
             throw new Error(`Error en la respuesta: ${response.status}`);
         }
 
-        //const data = await response.json();
+        const data = await response.json();
         console.log("Datos recibidos:", data);
 
         if (!data.ventas || data.ventas.length === 0) {
