@@ -4,6 +4,12 @@ body {
     /* font-family: Inter; */
 }
 
+#alert-editar{
+    font-size: 15px;
+    color:red;
+    padding: 10px 30px;
+}
+
 .register-container {
     display: flex;
     justify-content: space-between;
