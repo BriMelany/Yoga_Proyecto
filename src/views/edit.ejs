@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <%- include('partials/head') %>
+    <link rel="stylesheet" href="/css/clientes.css">
+    <link rel="stylesheet" href="/css/inicio.css">
+    <title>Document</title>
+</head>
+<body>
+
+    <%- include('partials/navigation') %>
+
+    <section class="form-container">
+
+        <div class="encabezado">DATOS</div>
+        <form id="edit-form">
+
+            <div class="form-line-contain">
+                <div class="form-line">
+
+                    <div class="line1">
+                        <label>Nombres:</label>
+                        <input id="nombres" type="text">
+                    </div>
+
+                    <div class="line1">
+                        <label>Apellidos:</label>
+                        <input id="apellidos"type="text">
+                    </div>
+
+                </div>
+
+                <div class="form-line">
+
+                    <div class="line3">
+                        <label>Documento:</label>
+                        <select id="tipo-documento">
+                            <option value="DNI">DNI</option>
+                            <option value="Pasaporte">Pasaporte</option>
+                            <option value="Carnet de extranjería">Carnet de extranjería</option>
+                        </select>
+                    </div>
+
+                    <div class="line1">
+                        <label>Correo:</label>
+                        <input id="correo" type="email">
+                    </div>
+
+                </div>
+
+
+                <div class="form-line">
+
+                    <div class="line1">
+                        <div class="number">
+                            <label>Numero:</label>
+                            <input id="numero"type="text">
+                        </div>
+                        <button  class="number-button">Buscar</button>
+                    </div>
+
+                    <div class="line1">
+                        <label>Celular:</label>
+                        <input id="celular" type="text">
+                    </div>
+
+                </div>
+
+                <div class="form-line-2">
+
+                    <div class="line4">
+                        <label>Dirección:</label>
+                        <input id="direccion"type="text">
+                    </div>
+                </div>
+
+                <div class="form-line">
+
+                    <div class="line1">
+                        <label>Ciudad:</label>
+                        <input id="ciudad" type="text">
+                    </div>
+
+                    <div class="line1">
+                        <label>Provincia:</label>
+                        <input id="provincia"type="text">
+                    </div>
+
+                </div>
+
+
+                <div class="form-line">
+
+                    <div class="line1">
+                        <label>Distrito:</label>
+                        <input id="distrito" type="text">
+                    </div>
+
+                    <div class="line3">
+                        <label>País:</label>
+                        <select id="pais">
+                            <option value="Peru">Perú</option>
+                            <option value="Argentina">Argentina</option>
+                            <option value="Brasil">Brasil</option>
+                            <option value="Chile">Chile</option>
+                            <option value="Colombia">Colombia</option>
+                            <option value="Ecuador">Ecuador</option>
+                            <option value="México">México</option>
+                            <option value="España">España</option>
+                            <option value="Estados Unidos">Estados Unidos</option>
+                            <option value="Francia">Francia</option>
+                            <option value="Alemania">Alemania</option>
+                            <option value="Italia">Italia</option>
+                            <option value="Japón">Japón</option>
+                            <option value="China">China</option>
+                            <option value="India">India</option>
+                        </select>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="final-line">
+
+                <div class="client">
+
+                    <div class="check">
+                        <input type="radio"  name="cliente" value= "Nuevo">
+                        <label>Cliente Nuevo</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio" name="cliente" value="Potencial">
+                        <label>Cliente Potencial</label>
+                    </div>
+                    <div class="check">
+                        <input type="radio" name="cliente" value="Recurrente">
+                        <label>Cliente Recurrente</label>
+                    </div>
+
+                </div>
+
+                <div class="buttons">
+
+                    <button type="submit">Guardar Cliente</button>
+                    <button type="button" id="clear-button" >Limpiar datos</button>
+
+                </div>
+
+            </div>
+
+
+
+        </form>
+
+    </section>
+
+    <script src="/js/edit.js"></script>
+</body>
+</html>

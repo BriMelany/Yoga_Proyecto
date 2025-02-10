@@ -1,4 +1,4 @@
-const apiUrl = 'http://localhost:3000/api/clientes';
+const apiUrl = 'https://api-proyecto-3.onrender.com/api/clientes';
 
 document.addEventListener('DOMContentLoaded', async function () {
     try {
@@ -13,19 +13,19 @@ document.addEventListener('DOMContentLoaded', async function () {
         result.forEach(cliente => {
             const tr = document.createElement('tr');
             tr.innerHTML = `
-                <th scope="row">${cliente.documento}</th>
+                <th scope="row">${cliente.id}</th>
                 <td>${cliente.nombre}</td>
                 <td>${cliente.apellido}</td>
                 <td>${cliente.correo}</td>
                 <td>${cliente.celular}</td>
-                <td>${cliente.tipoCliente}</td>
-                <td>${cliente.fechaRegistro}</td>
+                <td>${cliente.tipo_cliente}</td>
+                <td>${cliente.fecha_registro}</td>
                 <td>${cliente.direccion}</td>
                 <td>
-                    <button class="edit-btn" data-id="${cliente.id}">
+                    <button class="delete-btn" data-id="${cliente.id}">
                         <img src="/img/image108.png" alt="Edit">
                     </button>
-                    <button class="delete-btn" data-id="${cliente.id}">
+                    <button class="edit-btn" data-id="${cliente.id}">
                         <img src="/img/image109.png" alt="Delete">
                     </button>
                 </td>
@@ -33,10 +33,24 @@ document.addEventListener('DOMContentLoaded', async function () {
             tbody.appendChild(tr);
         });
 
+        // Verificar que los botones existen
+        const editButtons = document.querySelectorAll('.edit-btn');
+        const deleteButtons = document.querySelectorAll('.delete-btn');
+        console.log(`Found ${editButtons.length} edit buttons and ${deleteButtons.length} delete buttons.`);
+
+        editButtons.forEach(button => {
+            button.addEventListener('click', function () {
+                const clientId = this.getAttribute('data-id');
+                window.location.href = `/edit?clientId=${clientId}`;
+            });
+        });
+
+
         // Agregar funcionalidad a los botones de editar y eliminar
-        document.querySelectorAll('.edit-btn').forEach(button => {
+        editButtons.forEach(button => {
             button.addEventListener('click', function () {
                 const id = this.getAttribute('data-id');
+                console.log(`Edit button clicked for client ID: ${id}`);
                 document.getElementById('edit-form').addEventListener('submit', async function (event) {
                     event.preventDefault();
                     const selectedCliente = document.querySelector('input[name="cliente"]:checked').value;
@@ -45,9 +59,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                         apellidos: document.getElementById('apellidos').value,
                         correo: document.getElementById('correo').value,
                         celular: document.getElementById('celular').value,
-                        tipoCliente: selectedCliente,
                         direccion: document.getElementById('direccion').value,
-                        fechaRegistro: new Date().toISOString().split('T')[0] // Genera la fecha actual
+                        ciudad: document.getElementById('ciudad').value,
+                        provincia: document.getElementById('provincia').value,
+                        distrito: document.getElementById('distrito').value,
+                        pais: document.getElementById('pais').value,
+                        fechaRegistro:new Date().toISOString().split('T')[0], 
+                        tipoCliente: selectedCliente,
+                        tipoDocumento: document.getElementById('tipo-documento').value,
                     };
                     try {
                         const response = await fetch(`${apiUrl}/${id}`, {
@@ -75,9 +94,10 @@ document.addEventListener('DOMContentLoaded', async function () {
             });
         });
 
-        document.querySelectorAll('.delete-btn').forEach(button => {
+        deleteButtons.forEach(button => {
             button.addEventListener('click', async function () {
                 const id = this.getAttribute('data-id');
+                console.log(`Attempting to delete client with ID: ${id}`);
                 try {
                     const response = await fetch(`${apiUrl}/${id}`, {
                         method: 'DELETE',
@@ -85,11 +105,21 @@ document.addEventListener('DOMContentLoaded', async function () {
                             'Content-Type': 'application/json'
                         }
                     });
-                    const result = await response.json();
-                    console.log(result.message);
-                    // Elimina la fila de la tabla
-                    const row = button.closest('tr');
-                    row.remove();
+                    if (response.ok) {
+                        // Verifica si la respuesta tiene contenido antes de intentar analizarla como JSON
+                        const text = await response.text();
+                        if (text) {
+                            const result = JSON.parse(text);
+                            console.log(result.message);
+                        } else {
+                            console.log('Client deleted successfully, but no message returned.');
+                        }
+                        // Elimina la fila de la tabla
+                        const row = button.closest('tr');
+                        row.remove();
+                    } else {
+                        console.error('Error deleting client:', response.statusText);
+                    }
                 } catch (error) {
                     console.error('Error deleting client:', error);
                 }
@@ -97,17 +127,24 @@ document.addEventListener('DOMContentLoaded', async function () {
         });
 
         // Manejar la creación de un nuevo cliente al enviar el formulario
-        document.getElementById('edit-form').addEventListener('submit', async function (event) {
+        document.getElementById('create-form').addEventListener('submit', async function (event) {
             event.preventDefault();
-            const selectedCliente = document.querySelector('input[name="create-cliente"]:checked').value;
+            const selectedCliente = document.querySelector('input[name="cliente"]:checked').value;
             const newCliente = {
+                id: document.getElementById('numero').value,
                 nombres: document.getElementById('nombres').value,
                 apellidos: document.getElementById('apellidos').value,
                 correo: document.getElementById('correo').value,
                 celular: document.getElementById('celular').value,
-                tipoCliente: selectedCliente,
                 direccion: document.getElementById('direccion').value,
-                fechaRegistro: new Date().toISOString().split('T')[0] // Genera la fecha actual
+                ciudad: document.getElementById('ciudad').value,
+                provincia: document.getElementById('provincia').value,
+                distrito: document.getElementById('distrito').value,
+                pais: document.getElementById('pais').value,
+                fechaRegistro:new Date().toISOString().split('T')[0], 
+                tipoCliente: selectedCliente,
+                tipoDocumento: document.getElementById('tipo-documento').value,
+                
             };
             try {
                 const response = await fetch(apiUrl, {
@@ -122,19 +159,19 @@ document.addEventListener('DOMContentLoaded', async function () {
                 // Agrega el nuevo cliente a la tabla
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
-                    <th scope="row">${result.documento}</th>
-                    <td>${newCliente.nombres}</td>
-                    <td>${newCliente.apellidos}</td>
-                    <td>${newCliente.correo}</td>
-                    <td>${newCliente.celular}</td>
-                    <td>${newCliente.tipoCliente}</td>
-                    <td>${newCliente.fechaRegistro}</td>
-                    <td>${newCliente.direccion}</td>
+                    <th scope="row">${result.id}</th>
+                    <td>${result.nombre}</td>
+                    <td>${result.apellido}</td>
+                    <td>${result.correo}</td>
+                    <td>${result.celular}</td>
+                    <td>${result.tipo_cliente}</td>
+                    <td>${result.fecha_registro}</td>
+                    <td>${result.direccion}</td>
                     <td>
-                        <button class="edit-btn" data-id="${result.documento}">
+                        <button class="edit-btn" data-id="${result.id}">
                             <img src="/img/image108.png" alt="Edit">
                         </button>
-                        <button class="delete-btn" data-id="${result.documento}">
+                        <button class="delete-btn" data-id="${result.id}">
                             <img src="/img/image109.png" alt="Delete">
                         </button>
                     </td>
@@ -149,7 +186,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Manejar la búsqueda de un cliente al hacer clic en el botón de buscar
         document.querySelector('.number-button').addEventListener('click', async function (event) {
             event.preventDefault();
-            const id= document.getElementById('numero').value;
+            const id = document.getElementById('numero').value;
             try {
                 const response = await fetch(`${apiUrl}/${id}`, {
                     method: 'GET',
@@ -159,19 +196,44 @@ document.addEventListener('DOMContentLoaded', async function () {
                 });
                 const cliente = await response.json();
                 // Rellenar los inputs del formulario con los datos del cliente
-                document.getElementById('nombres').value = cliente.nombres;
-                document.getElementById('apellidos').value = cliente.apellidos;
+                document.getElementById('nombres').value = cliente.nombre;
+                document.getElementById('apellidos').value = cliente.apellido;
+                const selectDocumento = document.getElementById('tipo-documento');
+                if (selectDocumento) {
+                    const option = selectDocumento.querySelector(`option[value="${cliente.tipo_documento}"]`);
+                    if (option) {
+                        option.selected = true;
+                    } else {
+                        console.error(`Option with value "${cliente.documento}" not found.`);
+                    }
+                }
                 document.getElementById('correo').value = cliente.correo;
                 document.getElementById('celular').value = cliente.celular;
                 document.getElementById('direccion').value = cliente.direccion;
-                document.querySelector(`input[name="cliente"][value="${cliente.tipoCliente}"]`).checked = true;
+                document.getElementById('ciudad').value = cliente.ciudad;
+                document.getElementById('provincia').value = cliente.provincia;
+                document.getElementById('distrito').value = cliente.distrito;
+                const selectPais = document.getElementById('pais');
+                if (selectPais) {
+                    const option = selectPais.querySelector(`option[value="${cliente.pais}"]`);
+                    if (option) {
+                        option.selected = true;
+                    } else {
+                        console.error(`Option with value "${cliente.pais}" not found.`);
+                    }
+                }
+                const radioCliente = document.querySelector(`input[name="cliente"][value="${cliente.tipo_cliente}"]`);
+                if (radioCliente) {
+                    radioCliente.checked = true;
+                }
+
             } catch (error) {
                 console.error('Error fetching client:', error);
             }
 
         });
 
-        document.getElementById('clear-button').addEventListener('click', function() {
+        document.getElementById('clear-button').addEventListener('click', function () {
             document.getElementById('nombres').value = '';
             document.getElementById('apellidos').value = '';
             document.getElementById('correo').value = '';
@@ -184,7 +246,7 @@ document.addEventListener('DOMContentLoaded', async function () {
             document.querySelectorAll('input[name="cliente"]').forEach(radio => radio.checked = false);
             document.querySelector('select').selectedIndex = 0;
         });
-        
+
     } catch (error) {
         console.error('Error fetching clients:', error);
     }
@@ -194,4 +256,6 @@ document.addEventListener('DOMContentLoaded', async function () {
 document.addEventListener('DOMContentLoaded', async function () {
     const fechaRegistro = document.getElementById('fechaRegistro')
     fechaRegistro.textContent = new Date().toISOString().split('T')[0]
+
 })
+
