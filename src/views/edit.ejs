@@ -12,8 +12,9 @@
 
     <%- include('partials/navigation') %>
 
-    <section class="form-container">
+    <p id="alert-editar"></p>
 
+    <section class="form-container">
         <div class="encabezado">DATOS</div>
         <form id="edit-form">
 
@@ -22,12 +23,12 @@
 
                     <div class="line1">
                         <label>Nombres:</label>
-                        <input id="nombres" type="text">
+                        <input id="edit-nombres" type="text">
                     </div>
 
                     <div class="line1">
                         <label>Apellidos:</label>
-                        <input id="apellidos"type="text">
+                        <input id="edit-apellidos"type="text">
                     </div>
 
                 </div>
@@ -36,7 +37,7 @@
 
                     <div class="line3">
                         <label>Documento:</label>
-                        <select id="tipo-documento">
+                        <select id="edit-tipo-documento">
                             <option value="DNI">DNI</option>
                             <option value="Pasaporte">Pasaporte</option>
                             <option value="Carnet de extranjería">Carnet de extranjería</option>
@@ -45,7 +46,7 @@
 
                     <div class="line1">
                         <label>Correo:</label>
-                        <input id="correo" type="email">
+                        <input id="edit-correo" type="email">
                     </div>
 
                 </div>
@@ -56,14 +57,14 @@
                     <div class="line1">
                         <div class="number">
                             <label>Numero:</label>
-                            <input id="numero"type="text">
+                            <input id="edit-numero"type="text">
                         </div>
-                        <button  class="number-button">Buscar</button>
+                        <button  class="buscar-button">Buscar</button>
                     </div>
 
                     <div class="line1">
                         <label>Celular:</label>
-                        <input id="celular" type="text">
+                        <input id="edit-celular" type="text">
                     </div>
 
                 </div>
@@ -72,7 +73,7 @@
 
                     <div class="line4">
                         <label>Dirección:</label>
-                        <input id="direccion"type="text">
+                        <input id="edit-direccion"type="text">
                     </div>
                 </div>
 
@@ -80,12 +81,12 @@
 
                     <div class="line1">
                         <label>Ciudad:</label>
-                        <input id="ciudad" type="text">
+                        <input id="edit-ciudad" type="text">
                     </div>
 
                     <div class="line1">
                         <label>Provincia:</label>
-                        <input id="provincia"type="text">
+                        <input id="edit-provincia"type="text">
                     </div>
 
                 </div>
@@ -95,12 +96,12 @@
 
                     <div class="line1">
                         <label>Distrito:</label>
-                        <input id="distrito" type="text">
+                        <input id="edit-distrito" type="text">
                     </div>
 
                     <div class="line3">
                         <label>País:</label>
-                        <select id="pais">
+                        <select id="edit-pais">
                             <option value="Peru">Perú</option>
                             <option value="Argentina">Argentina</option>
                             <option value="Brasil">Brasil</option>
@@ -127,15 +128,15 @@
 
                 <div class="client">
 
-                    <div class="check">
+                    <div class="edit-check">
                         <input type="radio"  name="cliente" value= "Nuevo">
                         <label>Cliente Nuevo</label>
                     </div>
-                    <div class="check">
+                    <div class="edit-check">
                         <input type="radio" name="cliente" value="Potencial">
                         <label>Cliente Potencial</label>
                     </div>
-                    <div class="check">
+                    <div class="edit-check">
                         <input type="radio" name="cliente" value="Recurrente">
                         <label>Cliente Recurrente</label>
                     </div>
@@ -144,8 +145,9 @@
 
                 <div class="buttons">
 
-                    <button type="submit">Guardar Cliente</button>
-                    <button type="button" id="clear-button" >Limpiar datos</button>
+                    <button type="submit">Editar Cliente</button>
+                    <button type="button" id="limpiar-button" >Limpiar datos</button>
+                    <button id="retornar-button">Retornar</button>
 
                 </div>
 

@@ -33,66 +33,37 @@ document.addEventListener('DOMContentLoaded', async function () {
             tbody.appendChild(tr);
         });
 
-        // Verificar que los botones existen
         const editButtons = document.querySelectorAll('.edit-btn');
         const deleteButtons = document.querySelectorAll('.delete-btn');
-        console.log(`Found ${editButtons.length} edit buttons and ${deleteButtons.length} delete buttons.`);
-
-        editButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const clientId = this.getAttribute('data-id');
-                window.location.href = `/edit?clientId=${clientId}`;
-            });
-        });
+        console.log(`Found ${deleteButtons.length} delete buttons.`);
 
 
-        // Agregar funcionalidad a los botones de editar y eliminar
-        editButtons.forEach(button => {
-            button.addEventListener('click', function () {
-                const id = this.getAttribute('data-id');
-                console.log(`Edit button clicked for client ID: ${id}`);
-                document.getElementById('edit-form').addEventListener('submit', async function (event) {
-                    event.preventDefault();
-                    const selectedCliente = document.querySelector('input[name="cliente"]:checked').value;
-                    const updatedCliente = {
-                        nombres: document.getElementById('nombres').value,
-                        apellidos: document.getElementById('apellidos').value,
-                        correo: document.getElementById('correo').value,
-                        celular: document.getElementById('celular').value,
-                        direccion: document.getElementById('direccion').value,
-                        ciudad: document.getElementById('ciudad').value,
-                        provincia: document.getElementById('provincia').value,
-                        distrito: document.getElementById('distrito').value,
-                        pais: document.getElementById('pais').value,
-                        fechaRegistro:new Date().toISOString().split('T')[0], 
-                        tipoCliente: selectedCliente,
-                        tipoDocumento: document.getElementById('tipo-documento').value,
-                    };
-                    try {
-                        const response = await fetch(`${apiUrl}/${id}`, {
-                            method: 'PUT',
-                            headers: {
-                                'Content-Type': 'application/json'
-                            },
-                            body: JSON.stringify(updatedCliente)
-                        });
-                        const result = await response.json();
-                        console.log(result.message);
-                        // Actualiza la tabla con los nuevos datos
-                        const row = button.closest('tr');
-                        row.querySelector('td:nth-child(2)').textContent = updatedCliente.nombres;
-                        row.querySelector('td:nth-child(3)').textContent = updatedCliente.apellidos;
-                        row.querySelector('td:nth-child(4)').textContent = updatedCliente.correo;
-                        row.querySelector('td:nth-child(5)').textContent = updatedCliente.celular;
-                        row.querySelector('td:nth-child(6)').textContent = updatedCliente.tipoCliente;
-                        row.querySelector('td:nth-child(7)').textContent = updatedCliente.fechaRegistro;
-                        row.querySelector('td:nth-child(8)').textContent = updatedCliente.direccion;
-                    } catch (error) {
-                        console.error('Error updating client:', error);
+        document.addEventListener('click', function (event) {
+            if (event.target.closest('.edit-btn')) {
+                const button = event.target.closest('.edit-btn'); 
+                const row = button.closest('tr'); 
+        
+                if (row) {
+                    const cell = row.querySelector('td:nth-child(7)'); 
+                    if (cell) {
+                        const fechaRegistro = cell.textContent.trim();
+                        localStorage.setItem('fechaRegistro', fechaRegistro);
+                        console.log("Fecha guardada:", fechaRegistro);
+                    } else {
+                        console.error("No se encontró la celda de fecha.");
                     }
-                });
-            });
+                } else {
+                    console.error("No se encontró la fila.");
+                }
+        
+                const clientId = button.getAttribute('data-id'); //
+                localStorage.setItem('clientId', clientId);
+                window.location.href = `/edit`;
+            }
         });
+        
+
+
 
         deleteButtons.forEach(button => {
             button.addEventListener('click', async function () {
@@ -129,11 +100,12 @@ document.addEventListener('DOMContentLoaded', async function () {
         // Manejar la creación de un nuevo cliente al enviar el formulario
         document.getElementById('create-form').addEventListener('submit', async function (event) {
             event.preventDefault();
+
             const selectedCliente = document.querySelector('input[name="cliente"]:checked').value;
             const newCliente = {
                 id: document.getElementById('numero').value,
-                nombres: document.getElementById('nombres').value,
-                apellidos: document.getElementById('apellidos').value,
+                nombre: document.getElementById('nombres').value,
+                apellido: document.getElementById('apellidos').value,
                 correo: document.getElementById('correo').value,
                 celular: document.getElementById('celular').value,
                 direccion: document.getElementById('direccion').value,
@@ -141,11 +113,11 @@ document.addEventListener('DOMContentLoaded', async function () {
                 provincia: document.getElementById('provincia').value,
                 distrito: document.getElementById('distrito').value,
                 pais: document.getElementById('pais').value,
-                fechaRegistro:new Date().toISOString().split('T')[0], 
-                tipoCliente: selectedCliente,
-                tipoDocumento: document.getElementById('tipo-documento').value,
-                
+                fecha_registro: new Date().toISOString().split('T')[0],
+                tipo_cliente: selectedCliente,
+                tipo_documento: document.getElementById('tipo-documento').value,
             };
+
             try {
                 const response = await fetch(apiUrl, {
                     method: 'POST',
@@ -154,8 +126,10 @@ document.addEventListener('DOMContentLoaded', async function () {
                     },
                     body: JSON.stringify(newCliente)
                 });
+
                 const result = await response.json();
                 console.log(result.message);
+
                 // Agrega el nuevo cliente a la tabla
                 const tr = document.createElement('tr');
                 tr.innerHTML = `
@@ -176,14 +150,14 @@ document.addEventListener('DOMContentLoaded', async function () {
                         </button>
                     </td>
                 `;
-                tbody.appendChild(tr);
+
+                document.querySelector('tbody').appendChild(tr);
             } catch (error) {
                 console.error('Error creating client:', error);
             }
-
         });
 
-        // Manejar la búsqueda de un cliente al hacer clic en el botón de buscar
+
         document.querySelector('.number-button').addEventListener('click', async function (event) {
             event.preventDefault();
             const id = document.getElementById('numero').value;
@@ -204,7 +178,7 @@ document.addEventListener('DOMContentLoaded', async function () {
                     if (option) {
                         option.selected = true;
                     } else {
-                        console.error(`Option with value "${cliente.documento}" not found.`);
+                        console.error(`Option with value "${cliente.tipo_documento}" not found.`);
                     }
                 }
                 document.getElementById('correo').value = cliente.correo;
@@ -230,7 +204,6 @@ document.addEventListener('DOMContentLoaded', async function () {
             } catch (error) {
                 console.error('Error fetching client:', error);
             }
-
         });
 
         document.getElementById('clear-button').addEventListener('click', function () {
@@ -255,7 +228,7 @@ document.addEventListener('DOMContentLoaded', async function () {
 
 document.addEventListener('DOMContentLoaded', async function () {
     const fechaRegistro = document.getElementById('fechaRegistro')
-    fechaRegistro.textContent = new Date().toISOString().split('T')[0]
+    fechaRegistro.textContent = new Date().toISOString().split('T').join(' ').split('Z')[0];
 
 })
 
